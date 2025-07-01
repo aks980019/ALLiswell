@@ -1,0 +1,452 @@
+
+{
+  "application": {
+    "name": "Corporate Toolbox",
+    "version": "1.0.0",
+    "description": "Your daily productivity utilities in one place",
+    "author": "Corporate Toolbox Team"
+  },
+  "categories": [
+    {
+      "id": "productivity",
+      "name": "Productivity",
+      "icon": "fas fa-brain",
+      "description": "Boost your productivity with these essential tools",
+      "toolCount": 5,
+      "color": "#667eea"
+    },
+    {
+      "id": "document",
+      "name": "Documents",
+      "icon": "fas fa-file-alt",
+      "description": "Process and format your documents with ease",
+      "toolCount": 4,
+      "color": "#48bb78"
+    },
+    {
+      "id": "image",
+      "name": "Images",
+      "icon": "fas fa-image",
+      "description": "Transform and optimize your images instantly",
+      "toolCount": 5,
+      "color": "#ed8936"
+    },
+    {
+      "id": "web",
+      "name": "Web & Code",
+      "icon": "fas fa-code",
+      "description": "Essential development and coding utilities",
+      "toolCount": 8,
+      "color": "#38b2ac"
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "icon": "fas fa-chart-bar",
+      "description": "Professional business utilities for efficiency",
+      "toolCount": 5,
+      "color": "#9f7aea"
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "icon": "fas fa-shield-alt",
+      "description": "Protect your data with security utilities",
+      "toolCount": 3,
+      "color": "#f56565"
+    },
+    {
+      "id": "system",
+      "name": "System",
+      "icon": "fas fa-cog",
+      "description": "System utilities and advanced tools",
+      "toolCount": 4,
+      "color": "#718096"
+    }
+  ],
+  "tools": {
+    "productivity": [
+      {
+        "id": "todo-tool",
+        "name": "To-Do List",
+        "icon": "fas fa-tasks",
+        "description": "Organize tasks with local storage and completion tracking"
+      },
+      {
+        "id": "pomodoro-tool",
+        "name": "Pomodoro Timer",
+        "icon": "fas fa-clock",
+        "description": "25-minute focused work sessions with break tracking"
+      },
+      {
+        "id": "notes-tool",
+        "name": "Quick Notes",
+        "icon": "fas fa-sticky-note",
+        "description": "Jot down ideas with auto-save functionality"
+      },
+      {
+        "id": "clipboard-tool",
+        "name": "Clipboard Manager",
+        "icon": "fas fa-clipboard",
+        "description": "Store and manage clipboard history"
+      },
+      {
+        "id": "calendar-widget",
+        "name": "Calendar Widget",
+        "icon": "fas fa-calendar",
+        "description": "Simple event scheduling and reminders"
+      }
+    ],
+    "document": [
+      {
+        "id": "text-formatter",
+        "name": "Text Formatter",
+        "icon": "fas fa-align-left",
+        "description": "Convert text case and formatting instantly"
+      },
+      {
+        "id": "word-counter",
+        "name": "Word Counter",
+        "icon": "fas fa-calculator",
+        "description": "Count characters, words, and lines in real-time"
+      },
+      {
+        "id": "markdown-preview",
+        "name": "Markdown Previewer",
+        "icon": "fab fa-markdown",
+        "description": "Live preview of markdown formatting"
+      },
+      {
+        "id": "pdf-tools",
+        "name": "PDF Tools",
+        "icon": "fas fa-file-pdf",
+        "description": "Merge, split, and compress PDF files"
+      }
+    ],
+    "image": [
+      {
+        "id": "image-resizer",
+        "name": "Image Resizer",
+        "icon": "fas fa-expand-arrows-alt",
+        "description": "Resize images to custom dimensions"
+      },
+      {
+        "id": "favicon-generator",
+        "name": "Favicon Generator",
+        "icon": "fas fa-bookmark",
+        "description": "Create favicons in multiple sizes"
+      },
+      {
+        "id": "image-compressor",
+        "name": "Image Compressor",
+        "icon": "fas fa-compress",
+        "description": "Reduce file size while maintaining quality"
+      },
+      {
+        "id": "format-converter",
+        "name": "Format Converter",
+        "icon": "fas fa-exchange-alt",
+        "description": "Convert between image formats (JPEG, PNG, WebP)"
+      },
+      {
+        "id": "crop-rotate",
+        "name": "Crop & Rotate",
+        "icon": "fas fa-crop",
+        "description": "Rotate and crop images with precision"
+      }
+    ],
+    "web": [
+      {
+        "id": "json-formatter",
+        "name": "JSON Formatter",
+        "icon": "fas fa-code",
+        "description": "Format, validate, and minify JSON data"
+      },
+      {
+        "id": "qr-generator",
+        "name": "QR Code Generator",
+        "icon": "fas fa-qrcode",
+        "description": "Generate QR codes for text and URLs"
+      },
+      {
+        "id": "base64-tool",
+        "name": "Base64 Encoder/Decoder",
+        "icon": "fas fa-exchange-alt",
+        "description": "Encode and decode Base64 strings"
+      },
+      {
+        "id": "color-picker",
+        "name": "Color Picker",
+        "icon": "fas fa-palette",
+        "description": "Pick colors and generate palettes"
+      },
+      {
+        "id": "lorem-generator",
+        "name": "Lorem Ipsum",
+        "icon": "fas fa-text-width",
+        "description": "Generate placeholder text for designs"
+      },
+      {
+        "id": "code-minifier",
+        "name": "Code Minifier",
+        "icon": "fas fa-compress-alt",
+        "description": "Minify HTML, CSS, and JavaScript code"
+      },
+      {
+        "id": "regex-tester",
+        "name": "Regex Tester",
+        "icon": "fas fa-search",
+        "description": "Test regular expressions with live matching"
+      },
+      {
+        "id": "url-encoder",
+        "name": "URL Encoder",
+        "icon": "fas fa-link",
+        "description": "Encode and decode URL components"
+      }
+    ],
+    "business": [
+      {
+        "id": "currency-converter",
+        "name": "Currency Converter",
+        "icon": "fas fa-dollar-sign",
+        "description": "Convert between major world currencies"
+      },
+      {
+        "id": "unit-converter",
+        "name": "Unit Converter",
+        "icon": "fas fa-balance-scale",
+        "description": "Convert length, weight, and temperature units"
+      },
+      {
+        "id": "invoice-generator",
+        "name": "Invoice Generator",
+        "icon": "fas fa-file-invoice",
+        "description": "Create professional invoices quickly"
+      },
+      {
+        "id": "email-templates",
+        "name": "Email Templates",
+        "icon": "fas fa-envelope",
+        "description": "Generate common business email templates"
+      },
+      {
+        "id": "meeting-notes",
+        "name": "Meeting Notes",
+        "icon": "fas fa-clipboard-list",
+        "description": "Format structured meeting notes and agendas"
+      }
+    ],
+    "security": [
+      {
+        "id": "password-generator",
+        "name": "Password Generator",
+        "icon": "fas fa-key",
+        "description": "Generate secure passwords with strength analysis"
+      },
+      {
+        "id": "secure-notepad",
+        "name": "Secure Notepad",
+        "icon": "fas fa-lock",
+        "description": "Encrypt and decrypt sensitive notes"
+      },
+      {
+        "id": "clipboard-cleaner",
+        "name": "Clipboard Cleaner",
+        "icon": "fas fa-eraser",
+        "description": "Clear sensitive data from clipboard history"
+      }
+    ],
+    "system": [
+      {
+        "id": "timezone-converter",
+        "name": "Timezone Converter",
+        "icon": "fas fa-globe",
+        "description": "Convert time between different timezones"
+      },
+      {
+        "id": "stopwatch",
+        "name": "Stopwatch",
+        "icon": "fas fa-stopwatch",
+        "description": "Precision stopwatch with lap timing"
+      },
+      {
+        "id": "chatgpt-tool",
+        "name": "AI Search Assistant",
+        "icon": "fas fa-robot",
+        "description": "Get instant programming help and technical guidance"
+      },
+      {
+        "id": "weather-widget",
+        "name": "Weather Widget",
+        "icon": "fas fa-cloud-sun",
+        "description": "Get weather information for any city"
+      }
+    ]
+  },
+  "settings": {
+    "sessionTimeout": 1440,
+    "theme": "glassmorphism",
+    "autoSave": true,
+    "notifications": true
+  },
+  "currency": {
+    "rates": {
+      "USD": { "EUR": 0.85, "GBP": 0.73, "JPY": 110 },
+      "EUR": { "USD": 1.18, "GBP": 0.86, "JPY": 129 },
+      "GBP": { "USD": 1.37, "EUR": 1.16, "JPY": 151 },
+      "JPY": { "USD": 0.009, "EUR": 0.008, "GBP": 0.007 }
+    },
+    "symbols": {
+      "USD": "$",
+      "EUR": "€",
+      "GBP": "£",
+      "JPY": "¥"
+    }
+  },
+  "units": {
+    "length": {
+      "toMeters": {
+        "mm": 0.001,
+        "cm": 0.01,
+        "m": 1,
+        "km": 1000,
+        "in": 0.0254,
+        "ft": 0.3048,
+        "yd": 0.9144,
+        "mi": 1609.34
+      }
+    },
+    "weight": {
+      "toGrams": {
+        "mg": 0.001,
+        "g": 1,
+        "kg": 1000,
+        "oz": 28.3495,
+        "lb": 453.592,
+        "ton": 1000000
+      }
+    }
+  },
+  "timezones": [
+    { "value": "UTC", "label": "UTC" },
+    { "value": "America/New_York", "label": "EST" },
+    { "value": "America/Los_Angeles", "label": "PST" },
+    { "value": "Europe/London", "label": "GMT" },
+    { "value": "Asia/Tokyo", "label": "JST" },
+    { "value": "Australia/Sydney", "label": "AEST" },
+    { "value": "Europe/Paris", "label": "CET" },
+    { "value": "Asia/Shanghai", "label": "CST" }
+  ],
+  "emailTemplates": {
+    "meeting": {
+      "subject": "Meeting Request",
+      "template": "Dear {recipientName},\n\nI hope this email finds you well. I would like to schedule a meeting to discuss {topic}.\n\nWould you be available for a {duration} meeting on {date}? Please let me know what works best for your schedule.\n\nBest regards,\n{senderName}"
+    },
+    "follow-up": {
+      "subject": "Following Up",
+      "template": "Hi {recipientName},\n\nI wanted to follow up on our previous conversation regarding {topic}.\n\n{message}\n\nPlease let me know if you have any questions or if there's anything else I can help with.\n\nBest regards,\n{senderName}"
+    },
+    "introduction": {
+      "subject": "Introduction",
+      "template": "Dear {recipientName},\n\nI hope this email finds you well. I wanted to take a moment to introduce myself.\n\n{introduction}\n\nI look forward to connecting with you.\n\nBest regards,\n{senderName}"
+    },
+    "thank-you": {
+      "subject": "Thank You",
+      "template": "Dear {recipientName},\n\nThank you for {reason}. I really appreciate {details}.\n\n{additionalMessage}\n\nBest regards,\n{senderName}"
+    }
+  },
+  "productivityTips": [
+    "Use the Pomodoro Timer to break your work into focused 25-minute intervals. This technique helps maintain concentration and prevents burnout.",
+    "Keep a daily todo list and prioritize tasks by importance and urgency. Cross off completed items for a sense of accomplishment.",
+    "Take regular breaks every hour to rest your eyes and stretch. Your body and mind will thank you for it.",
+    "Use the 2-minute rule: if a task takes less than 2 minutes, do it immediately rather than adding it to your list.",
+    "Batch similar tasks together to maintain focus and reduce context switching throughout your day.",
+    "Start your day with the most challenging task when your energy levels are highest.",
+    "Use markdown formatting in your notes to keep them organized and easy to read later.",
+    "Set specific times for checking emails rather than constantly monitoring your inbox throughout the day.",
+    "Create templates for common tasks like meeting notes and emails to save time and maintain consistency.",
+    "Review and clean up your digital workspace regularly - delete unnecessary files and organize important ones.",
+    "Use keyboard shortcuts to speed up common tasks. Even small time savings add up over the day.",
+    "Keep a 'someday/maybe' list for ideas that aren't urgent but you don't want to forget.",
+    "Use the password generator to create unique, strong passwords for all your accounts.",
+    "Take advantage of automation tools and templates to reduce repetitive tasks.",
+    "Set boundaries with notifications and distractions during your focused work periods."
+  ],
+  "aiResponses": {
+    "javascript": "JavaScript is a versatile, high-level programming language that runs in browsers and servers (Node.js). It supports object-oriented, functional, and procedural programming paradigms. Key features include dynamic typing, closures, and event-driven programming.",
+    "html": "HTML (HyperText Markup Language) structures web content using semantic elements like <header>, <main>, <section>, and <article>. HTML5 introduced new APIs, form controls, and multimedia elements for modern web development.",
+    "css": "CSS (Cascading Style Sheets) styles web pages with selectors, properties, and values. Modern CSS includes Flexbox, Grid, custom properties (CSS variables), and responsive design techniques like media queries.",
+    "python": "Python is a versatile language used for web development (Django, Flask), data science (pandas, numpy), AI/ML (tensorflow, pytorch), automation, and more. It emphasizes readability with clean, indented syntax.",
+    "react": "React is a component-based JavaScript library for building UIs. Key concepts include JSX, virtual DOM, hooks (useState, useEffect), props, state management, and component lifecycle."
+  },
+  "weatherConditions": [
+    { "name": "Sunny", "emoji": "☀️", "gradient": "linear-gradient(135deg, #ffd89b, #19547b)" },
+    { "name": "Cloudy", "emoji": "☁️", "gradient": "linear-gradient(135deg, #bdc3c7, #2c3e50)" },
+    { "name": "Rainy", "emoji": "🌧️", "gradient": "linear-gradient(135deg, #74b9ff, #0984e3)" },
+    { "name": "Partly Cloudy", "emoji": "⛅", "gradient": "linear-gradient(135deg, #ddd6fe, #7c3aed)" },
+    { "name": "Snowy", "emoji": "❄️", "gradient": "linear-gradient(135deg, #e0eafc, #cfdef3)" },
+    { "name": "Stormy", "emoji": "⛈️", "gradient": "linear-gradient(135deg, #434343, #000000)" }
+  ],
+  "quickActions": [
+    {
+      "id": "quick-note",
+      "name": "Quick Note",
+      "icon": "fas fa-sticky-note",
+      "description": "Jot down ideas instantly",
+      "target": "productivity.html"
+    },
+    {
+      "id": "generate-password",
+      "name": "Generate Password",
+      "icon": "fas fa-key",
+      "description": "Create secure password now",
+      "target": "security.html"
+    },
+    {
+      "id": "start-timer",
+      "name": "Start 25min Timer",
+      "icon": "fas fa-clock",
+      "description": "Begin a Pomodoro session",
+      "target": "productivity.html"
+    },
+    {
+      "id": "add-todo",
+      "name": "Add Todo",
+      "icon": "fas fa-tasks",
+      "description": "Add task to your list",
+      "target": "productivity.html"
+    }
+  ],
+  "featuredTools": [
+    {
+      "id": "todo-manager",
+      "name": "Smart To-Do Manager",
+      "icon": "fas fa-tasks",
+      "description": "Organize tasks with local storage and completion tracking",
+      "category": "productivity"
+    },
+    {
+      "id": "ai-assistant",
+      "name": "AI Search Assistant",
+      "icon": "fas fa-robot",
+      "description": "Get instant programming help and technical guidance",
+      "category": "system"
+    },
+    {
+      "id": "image-processor",
+      "name": "Image Processor",
+      "icon": "fas fa-compress",
+      "description": "Resize, compress, and convert images instantly",
+      "category": "image"
+    },
+    {
+      "id": "password-gen",
+      "name": "Password Generator",
+      "icon": "fas fa-key",
+      "description": "Create secure passwords with strength analysis",
+      "category": "security"
+    }
+  ]
+}
+

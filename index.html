@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Toolbox</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="modern-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <i class="fas fa-toolbox"></i>
+                <span class="logo-text">Corporate Toolbox</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <a href="#" onclick="showHome()" class="nav-link active">Home</a>
+                <a href="#" onclick="showCategory('productivity')" class="nav-link">Productivity</a>
+                <a href="#" onclick="showCategory('documents')" class="nav-link">Documents</a>
+                <a href="#" onclick="showCategory('images')" class="nav-link">Images</a>
+                <a href="#" onclick="showCategory('web-code')" class="nav-link">Web & Code</a>
+                <a href="#" onclick="showCategory('business')" class="nav-link">Business</a>
+                <a href="#" onclick="showCategory('security')" class="nav-link">Security</a>
+                <a href="#" onclick="showCategory('system')" class="nav-link">System</a>
+            </nav> 
+
+            <!-- User Actions -->
+            <div class="user-actions">
+                
+                <div class="user-info">
+                    <span class="username-display"></span>
+                    <button onclick="logout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-title">Corporate Toolbox</span>
+                <button class="mobile-close" onclick="toggleMobileMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-nav-content">
+                <a href="#" onclick="showHome(); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#" onclick="showCategory('productivity'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-tasks"></i> Productivity
+                </a>
+                <a href="#" onclick="showCategory('documents'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-file-alt"></i> Documents
+                </a>
+                <a href="#" onclick="showCategory('images'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-image"></i> Images
+                </a>
+                <a href="#" onclick="showCategory('web-code'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-code"></i> Web & Code
+                </a>
+                <a href="#" onclick="showCategory('business'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-briefcase"></i> Business
+                </a>
+                <a href="#" onclick="showCategory('security'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-shield-alt"></i> Security
+                </a>
+                <a href="#" onclick="showCategory('system'); toggleMobileMenu()" class="mobile-nav-link">
+                    <i class="fas fa-cog"></i> System
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="home-overview">
+
+
+        <div class="stats-grid">
+            <div class="stat-card" onclick="showCategory('productivity')">
+                <i class="fas fa-brain"></i>
+                <h3>5</h3>
+                <p>Productivity Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('documents')">
+                <i class="fas fa-file-alt"></i>
+                <h3>4</h3>
+                <p>Document Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('images')">
+                <i class="fas fa-image"></i>
+                <h3>5</h3>
+                <p>Image Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('web-code')">
+                <i class="fas fa-code"></i>
+                <h3>8</h3>
+                <p>Web & Code Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('business')">
+                <i class="fas fa-chart-bar"></i>
+                <h3>5</h3>
+                <p>Business Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('security')">
+                <i class="fas fa-shield-alt"></i>
+                <h3>3</h3>
+                <p>Security Tools</p>
+            </div>
+            <div class="stat-card" onclick="showCategory('system')">
+                <i class="fas fa-cog"></i>
+                <h3>4</h3>
+                <p>System Tools</p>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="quick-actions-grid">
+                <div class="quick-action-card" onclick="openQuickNote()">
+                    <i class="fas fa-sticky-note"></i>
+                    <h4>Quick Note</h4>
+                    <p>Jot down ideas instantly</p>
+                </div>
+                <div class="quick-action-card" onclick="generateQuickPassword()">
+                    <i class="fas fa-key"></i>
+                    <h4>Generate Password</h4>
+                    <p>Create secure password now</p>
+                </div>
+                <div class="quick-action-card" onclick="startQuickTimer()">
+                    <i class="fas fa-clock"></i>
+                    <h4>Start 25min Timer</h4>
+                    <p>Begin a Pomodoro session</p>
+                </div>
+                <div class="quick-action-card" onclick="openQuickTodo()">
+                    <i class="fas fa-tasks"></i>
+                    <h4>Add Todo</h4>
+                    <p>Add task to your list</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <main class="tools-container">
+        <!-- Productivity Tools -->
+        <div id="productivity" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="todo-tool">
+                    <h3><i class="fas fa-tasks"></i> To-Do List</h3>
+                    <div class="tool-content">
+                        <input type="text" id="todo-input" placeholder="Add new task...">
+                        <button onclick="addTodo()">Add</button>
+                        <ul id="todo-list"></ul>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="pomodoro-tool">
+                    <h3><i class="fas fa-clock"></i> Pomodoro Timer</h3>
+                    <div class="tool-content">
+                        <div class="timer-display" id="timer-display">25:00</div>
+                        <div class="timer-controls">
+                            <button onclick="startTimer()">Start</button>
+                            <button onclick="pauseTimer()">Pause</button>
+                            <button onclick="resetTimer()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="notes-tool">
+                    <h3><i class="fas fa-sticky-note"></i> Quick Notes</h3>
+                    <div class="tool-content">
+                        <textarea id="notes-area" placeholder="Write your notes here..."></textarea>
+                        <div class="notes-controls">
+                            <button onclick="saveNotes()">Save</button>
+                            <button onclick="exportNotes()">Export</button>
+                            <button onclick="clearNotes()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="clipboard-tool">
+                    <h3><i class="fas fa-clipboard"></i> Clipboard Manager</h3>
+                    <div class="tool-content">
+                        <input type="text" id="clipboard-input" placeholder="Enter text to save...">
+                        <button onclick="saveToClipboard()">Save</button>
+                        <div id="clipboard-history"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="calendar-widget">
+                    <h3><i class="fas fa-calendar"></i> Calendar Widget</h3>
+                    <div class="tool-content">
+                        <div id="calendar-display"></div>
+                        <div class="event-controls">
+                            <input type="text" id="event-title" placeholder="Event title...">
+                            <input type="datetime-local" id="event-datetime">
+                            <button onclick="addEvent()">Add Event</button>
+                        </div>
+                        <div id="events-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Tools -->
+        <div id="documents" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="text-formatter">
+                    <h3><i class="fas fa-align-left"></i> Text Formatter</h3>
+                    <div class="tool-content">
+                        <textarea id="text-input" placeholder="Enter text to format..."></textarea>
+                        <div class="format-controls">
+                            <button onclick="formatText('uppercase')">UPPERCASE</button>
+                            <button onclick="formatText('lowercase')">lowercase</button>
+                            <button onclick="formatText('title')">Title Case</button>
+                            <button onclick="formatText('sentence')">Sentence case</button>
+                        </div>
+                        <div id="text-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="word-counter">
+                    <h3><i class="fas fa-calculator"></i> Word Counter</h3>
+                    <div class="tool-content">
+                        <textarea id="counter-input" placeholder="Enter text to count..."></textarea>
+                        <div class="counter-stats">
+                            <span>Characters: <span id="char-count">0</span></span>
+                            <span>Words: <span id="word-count">0</span></span>
+                            <span>Lines: <span id="line-count">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="markdown-preview">
+                    <h3><i class="fab fa-markdown"></i> Markdown Previewer</h3>
+                    <div class="tool-content">
+                        <div class="markdown-container">
+                            <textarea id="markdown-input" placeholder="Enter markdown..."></textarea>
+                            <div id="markdown-output"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="pdf-tools">
+                    <h3><i class="fas fa-file-pdf"></i> PDF Tools</h3>
+                    <div class="tool-content">
+                        <input type="file" id="pdf-input" accept=".pdf" multiple>
+                        <div class="pdf-controls">
+                            <button onclick="mergePDFs()">Merge PDFs</button>
+                            <button onclick="splitPDF()">Split PDF</button>
+                            <button onclick="compressPDF()">Compress PDF</button>
+                        </div>
+                        <div id="pdf-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Tools -->
+        <div id="images" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="image-resizer">
+                    <h3><i class="fas fa-expand-arrows-alt"></i> Image Resizer</h3>
+                    <div class="tool-content">
+                        <input type="file" id="image-input" accept="image/*">
+                        <div class="resize-controls">
+                            <input type="number" id="width-input" placeholder="Width">
+                            <input type="number" id="height-input" placeholder="Height">
+                            <button onclick="resizeImage()">Resize</button>
+                        </div>
+                        <canvas id="image-canvas" style="display:none;"></canvas>
+                        <div id="image-preview"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="favicon-generator">
+                    <h3><i class="fas fa-bookmark"></i> Favicon Generator</h3>
+                    <div class="tool-content">
+                        <input type="file" id="favicon-input" accept="image/*">
+                        <button onclick="generateFavicon()">Generate Favicon</button>
+                        <div id="favicon-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="image-compressor">
+                    <h3><i class="fas fa-compress"></i> Image Compressor</h3>
+                    <div class="tool-content">
+                        <input type="file" id="compress-input" accept="image/*">
+                        <input type="range" id="quality-slider" min="0.1" max="1" step="0.1" value="0.8">
+                        <span>Quality: <span id="quality-value">80%</span></span>
+                        <button onclick="compressImage()">Compress</button>
+                        <div id="compression-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="format-converter">
+                    <h3><i class="fas fa-exchange-alt"></i> Format Converter</h3>
+                    <div class="tool-content">
+                        <input type="file" id="format-input" accept="image/*">
+                        <select id="target-format">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                        <button onclick="convertImageFormat()">Convert</button>
+                        <div id="format-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="crop-rotate">
+                    <h3><i class="fas fa-crop"></i> Crop & Rotate</h3>
+                    <div class="tool-content">
+                        <input type="file" id="crop-input" accept="image/*">
+                        <div class="crop-controls">
+                            <button onclick="rotateImage(90)">Rotate 90°</button>
+                            <button onclick="rotateImage(180)">Rotate 180°</button>
+                            <button onclick="rotateImage(-90)">Rotate -90°</button>
+                        </div>
+                        <canvas id="crop-canvas" style="display:none;"></canvas>
+                        <div id="crop-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web & Code Tools -->
+        <div id="web-code" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="json-formatter">
+                    <h3><i class="fas fa-code"></i> JSON Formatter</h3>
+                    <div class="tool-content">
+                        <textarea id="json-input" placeholder="Enter JSON to format..."></textarea>
+                        <div class="json-controls">
+                            <button onclick="formatJSON()">Format</button>
+                            <button onclick="validateJSON()">Validate</button>
+                            <button onclick="minifyJSON()">Minify</button>
+                        </div>
+                        <div id="json-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="qr-generator">
+                    <h3><i class="fas fa-qrcode"></i> QR Code Generator</h3>
+                    <div class="tool-content">
+                        <input type="text" id="qr-input" placeholder="Enter text or URL...">
+                        <button onclick="generateQR()">Generate QR</button>
+                        <div id="qr-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="base64-tool">
+                    <h3><i class="fas fa-exchange-alt"></i> Base64 Encoder/Decoder</h3>
+                    <div class="tool-content">
+                        <textarea id="base64-input" placeholder="Enter text to encode/decode..."></textarea>
+                        <div class="base64-controls">
+                            <button onclick="encodeBase64()">Encode</button>
+                            <button onclick="decodeBase64()">Decode</button>
+                        </div>
+                        <div id="base64-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="color-picker">
+                    <h3><i class="fas fa-palette"></i> Color Picker</h3>
+                    <div class="tool-content">
+                        <input type="color" id="color-input" value="#ff0000">
+                        <div class="color-info">
+                            <div>HEX: <span id="hex-value">#ff0000</span></div>
+                            <div>RGB: <span id="rgb-value">rgb(255, 0, 0)</span></div>
+                            <div>HSL: <span id="hsl-value">hsl(0, 100%, 50%)</span></div>
+                        </div>
+                        <div id="color-palette"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="lorem-generator">
+                    <h3><i class="fas fa-text-width"></i> Lorem Ipsum</h3>
+                    <div class="tool-content">
+                        <input type="number" id="lorem-count" value="3" min="1" max="50">
+                        <select id="lorem-type">
+                            <option value="paragraphs">Paragraphs</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="words">Words</option>
+                        </select>
+                        <button onclick="generateLorem()">Generate</button>
+                        <div id="lorem-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="code-minifier">
+                    <h3><i class="fas fa-compress-alt"></i> Code Minifier</h3>
+                    <div class="tool-content">
+                        <select id="code-type">
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="js">JavaScript</option>
+                        </select>
+                        <textarea id="code-input" placeholder="Enter code to minify..."></textarea>
+                        <button onclick="minifyCode()">Minify</button>
+                        <div id="code-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="regex-tester">
+                    <h3><i class="fas fa-search"></i> Regex Tester</h3>
+                    <div class="tool-content">
+                        <input type="text" id="regex-pattern" placeholder="Enter regex pattern...">
+                        <input type="text" id="regex-flags" placeholder="Flags (g,i,m)" value="g">
+                        <textarea id="regex-test-text" placeholder="Enter test text..."></textarea>
+                        <button onclick="testRegex()">Test Regex</button>
+                        <div id="regex-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="url-encoder">
+                    <h3><i class="fas fa-link"></i> URL Encoder</h3>
+                    <div class="tool-content">
+                        <textarea id="url-input" placeholder="Enter URL or text to encode/decode..."></textarea>
+                        <div class="url-controls">
+                            <button onclick="encodeURL()">Encode</button>
+                            <button onclick="decodeURL()">Decode</button>
+                        </div>
+                        <div id="url-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Tools -->
+        <div id="business" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="currency-converter">
+                    <h3><i class="fas fa-dollar-sign"></i> Currency Converter</h3>
+                    <div class="tool-content">
+                        <input type="number" id="currency-amount" placeholder="Amount">
+                        <select id="from-currency">
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="JPY">JPY</option>
+                        </select>
+                        <span>to</span>
+                        <select id="to-currency">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="JPY">JPY</option>
+                        </select>
+                        <button onclick="convertCurrency()">Convert</button>
+                        <div id="currency-result"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="unit-converter">
+                    <h3><i class="fas fa-balance-scale"></i> Unit Converter</h3>
+                    <div class="tool-content">
+                        <input type="number" id="unit-value" placeholder="Value">
+                        <select id="unit-type">
+                            <option value="length">Length</option>
+                            <option value="weight">Weight</option>
+                            <option value="temperature">Temperature</option>
+                        </select>
+                        <select id="from-unit"></select>
+                        <span>to</span>
+                        <select id="to-unit"></select>
+                        <button onclick="convertUnit()">Convert</button>
+                        <div id="unit-result"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="invoice-generator">
+                    <h3><i class="fas fa-file-invoice"></i> Invoice Generator</h3>
+                    <div class="tool-content">
+                        <input type="text" id="invoice-number" placeholder="Invoice Number">
+                        <input type="text" id="client-name" placeholder="Client Name">
+                        <textarea id="invoice-items" placeholder="Items (format: Item - $Amount)"></textarea>
+                        <button onclick="generateInvoice()">Generate Invoice</button>
+                        <div id="invoice-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="email-templates">
+                    <h3><i class="fas fa-envelope"></i> Email Templates</h3>
+                    <div class="tool-content">
+                        <select id="template-type">
+                            <option value="meeting">Meeting Request</option>
+                            <option value="follow-up">Follow Up</option>
+                            <option value="introduction">Introduction</option>
+                            <option value="thank-you">Thank You</option>
+                        </select>
+                        <input type="text" id="recipient-name" placeholder="Recipient Name">
+                        <button onclick="generateEmailTemplate()">Generate Template</button>
+                        <div id="email-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="meeting-notes">
+                    <h3><i class="fas fa-clipboard-list"></i> Meeting Notes</h3>
+                    <div class="tool-content">
+                        <input type="text" id="meeting-title" placeholder="Meeting Title">
+                        <input type="date" id="meeting-date">
+                        <textarea id="meeting-attendees" placeholder="Attendees (one per line)"></textarea>
+                        <textarea id="meeting-agenda" placeholder="Agenda items..."></textarea>
+                        <button onclick="formatMeetingNotes()">Format Notes</button>
+                        <div id="meeting-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Tools -->
+        <div id="security" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="password-generator">
+                    <h3><i class="fas fa-key"></i> Password Generator</h3>
+                    <div class="tool-content">
+                        <div class="password-options">
+                            <label><input type="number" id="password-length" value="12" min="4" max="50"> Length</label>
+                            <label><input type="checkbox" id="include-uppercase" checked> Uppercase</label>
+                            <label><input type="checkbox" id="include-lowercase" checked> Lowercase</label>
+                            <label><input type="checkbox" id="include-numbers" checked> Numbers</label>
+                            <label><input type="checkbox" id="include-symbols"> Symbols</label>
+                        </div>
+                        <button onclick="generatePassword()">Generate</button>
+                        <div id="password-output"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="secure-notepad">
+                    <h3><i class="fas fa-lock"></i> Secure Notepad</h3>
+                    <div class="tool-content">
+                        <input type="password" id="note-password" placeholder="Enter password to encrypt/decrypt">
+                        <textarea id="secure-notes" placeholder="Your secure notes..."></textarea>
+                        <div class="secure-controls">
+                            <button onclick="encryptNotes()">Encrypt</button>
+                            <button onclick="decryptNotes()">Decrypt</button>
+                            <button onclick="clearSecureNotes()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Tools -->
+        <div id="system" class="category-section">
+            <div class="tool-grid">
+                <div class="tool-card" id="timezone-converter">
+                    <h3><i class="fas fa-globe"></i> Timezone Converter</h3>
+                    <div class="tool-content">
+                        <input type="datetime-local" id="datetime-input">
+                        <select id="from-timezone">
+                            <option value="UTC">UTC</option>
+                            <option value="America/New_York">EST</option>
+                            <option value="America/Los_Angeles">PST</option>
+                            <option value="Europe/London">GMT</option>
+                            <option value="Asia/Tokyo">JST</option>
+                        </select>
+                        <span>to</span>
+                        <select id="to-timezone">
+                            <option value="America/New_York">EST</option>
+                            <option value="UTC">UTC</option>
+                            <option value="America/Los_Angeles">PST</option>
+                            <option value="Europe/London">GMT</option>
+                            <option value="Asia/Tokyo">JST</option>
+                        </select>
+                        <button onclick="convertTimezone()">Convert</button>
+                        <div id="timezone-result"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="stopwatch">
+                    <h3><i class="fas fa-stopwatch"></i> Stopwatch</h3>
+                    <div class="tool-content">
+                        <div class="stopwatch-display" id="stopwatch-display">00:00:00</div>
+                        <div class="stopwatch-controls">
+                            <button onclick="startStopwatch()">Start</button>
+                            <button onclick="pauseStopwatch()">Pause</button>
+                            <button onclick="resetStopwatch()">Reset</button>
+                            <button onclick="lapStopwatch()">Lap</button>
+                        </div>
+                        <div id="lap-times"></div>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="chatgpt-tool">
+                    <h3><i class="fas fa-robot"></i> AI Search Assistant</h3>
+                    <div class="tool-content">
+                        <textarea id="chat-input"
+                            placeholder="Ask me anything... (e.g., 'What is JavaScript?', 'How to center a div?')"></textarea>
+                        <button onclick="searchWithAI()">Search</button>
+                        <div id="chat-output"></div>
+                        <button onclick="clearChat()" style="margin-top: 10px; background: #e53e3e;">Clear Chat</button>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="weather-widget">
+                    <h3><i class="fas fa-cloud-sun"></i> Weather Widget</h3>
+                    <div class="tool-content">
+                        <input type="text" id="city-input" placeholder="Enter city name...">
+                        <button onclick="getWeather()">Get Weather</button>
+                        <div id="weather-display"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
