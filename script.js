@@ -181,22 +181,8 @@ function updateNavigation(activeCategory) {
     });
 }
 
-// Quick Action Functions - DISABLED
-function openQuickNote() {
-    alert('Quick actions are disabled');
-}
+// Quick Action Functions 
 
-function generateQuickPassword() {
-    alert('Quick actions are disabled');
-}
-
-function startQuickTimer() {
-    alert('Quick actions are disabled');
-}
-
-function openQuickTodo() {
-    alert('Quick actions are disabled');
-}
 
 function setupEventListeners() {
     const todoInput = document.getElementById('todo-input');
@@ -218,30 +204,20 @@ function setupEventListeners() {
         counterInput.addEventListener('input', updateTextCounter);
     }
 
-    const markdownInput = document.getElementById('markdown-input');
-    if (markdownInput) {
-        markdownInput.addEventListener('input', updateMarkdownPreview);
-    }
-
+ 
     const colorInput = document.getElementById('color-input');
     if (colorInput) {
         colorInput.addEventListener('input', updateColorPicker);
     }
 
-    const unitType = document.getElementById('unit-type');
-    if (unitType) {
-        unitType.addEventListener('change', setupUnitConverter);
-    }
+
 
     const imageInput = document.getElementById('image-input');
     if (imageInput) {
         imageInput.addEventListener('change', handleImageUpload);
     }
 
-    const faviconInput = document.getElementById('favicon-input');
-    if (faviconInput) {
-        faviconInput.addEventListener('change', handleFaviconUpload);
-    }
+  
 
     const chatInput = document.getElementById('chat-input');
     if (chatInput) {
@@ -412,30 +388,7 @@ function loadNotes() {
     }
 }
 
-// CLIPBOARD MANAGER FUNCTIONALITY - DISABLED
-function saveToClipboard() {
-    alert('Clipboard manager is disabled');
-}
-
-function renderClipboardHistory() {
-    const historyDiv = document.getElementById('clipboard-history');
-    if (historyDiv) {
-        historyDiv.innerHTML = '<p style="text-align: center; color: #666;">Clipboard manager is disabled</p>';
-    }
-}
-
-function copyToClipboard(text) {
-    alert('Clipboard manager is disabled');
-}
-
-function deleteClipboardItem(id) {
-    alert('Clipboard manager is disabled');
-}
-
-function loadClipboardHistory() {
-    renderClipboardHistory();
-}
-
+// CLIPBOARD MANAGER FUNCTIONALITY 
 // CALENDAR WIDGET FUNCTIONALITY
 function addEvent() {
     const titleInput = document.getElementById('event-title');
@@ -533,24 +486,7 @@ function updateTextCounter() {
 }
 
 // MARKDOWN PREVIEWER
-function updateMarkdownPreview() {
-    const input = document.getElementById('markdown-input');
-    const output = document.getElementById('markdown-output');
 
-    if (input && output) {
-        const text = input.value;
-        // Simple markdown conversion (basic implementation)
-        let html = text
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-            .replace(/\*(.*)\*/gim, '<em>$1</em>')
-            .replace(/\n/gim, '<br>');
-
-        output.innerHTML = html;
-    }
-}
 
 // PDF TOOLS (Mock implementations)
 function mergePDFs() {
@@ -633,46 +569,15 @@ function resizeImage() {
 }
 
 // FAVICON GENERATOR
-function handleFaviconUpload(event) {
-    alert('Favicon generator functionality would require additional libraries for proper implementation.');
-}
-
-function generateFavicon() {
-    alert('Favicon generator functionality would require additional libraries for proper implementation.');
-}
-
 // IMAGE COMPRESSOR
-function compressImage() {
-    alert('Image compressor functionality would require additional canvas manipulation.');
-}
-
 // FORMAT CONVERTER
-function convertImageFormat() {
-    alert('Format converter functionality would require additional canvas manipulation.');
-}
-
 // CROP & ROTATE
-function rotateImage(degrees) {
-    alert('Crop & rotate functionality would require additional canvas manipulation.');
-}
+
 
 // =========================================
 // WEB & CODE TOOLS
 // =========================================
-
 // JSON FORMATTER
-function formatJSON() {
-    alert('JSON formatter functionality is not implemented in this demo.');
-}
-
-function validateJSON() {
-    alert('JSON validator functionality is not implemented in this demo.');
-}
-
-function minifyJSON() {
-    alert('JSON minifier functionality is not implemented in this demo.');
-}
-
 // QR CODE GENERATOR
 function generateQR() {
     const textInput = document.getElementById('qr-input');
@@ -692,14 +597,6 @@ function generateQR() {
 }
 
 // BASE64 ENCODER/DECODER
-function encodeBase64() {
-    alert('Base64 encoder functionality is not implemented in this demo.');
-}
-
-function decodeBase64() {
-    alert('Base64 decoder functionality is not implemented in this demo.');
-}
-
 // COLOR PICKER
 function updateColorPicker() {
     const colorInput = document.getElementById('color-input');
@@ -803,24 +700,8 @@ function generateLorem() {
 }
 
 // CODE MINIFIER
-function minifyCode() {
-    alert('Code minifier functionality is not implemented in this demo.');
-}
-
 // REGEX TESTER
-function testRegex() {
-    alert('Regex tester functionality is not implemented in this demo.');
-}
-
 // URL ENCODER
-function encodeURL() {
-    alert('URL encoder functionality is not implemented in this demo.');
-}
-
-function decodeURL() {
-    alert('URL decoder functionality is not implemented in this demo.');
-}
-
 // =========================================
 // BUSINESS TOOLS
 // =========================================
@@ -863,49 +744,9 @@ function convertCurrency() {
 }
 
 // UNIT CONVERTER
-function setupUnitConverter() {
-    const unitType = document.getElementById('unit-type');
-    const fromUnit = document.getElementById('from-unit');
-    const toUnit = document.getElementById('to-unit');
-
-    if (!unitType || !fromUnit || !toUnit) return;
-
-    const units = {
-        length: ['meter', 'kilometer', 'centimeter', 'millimeter', 'inch', 'foot', 'yard', 'mile'],
-        weight: ['kilogram', 'gram', 'pound', 'ounce', 'ton'],
-        temperature: ['celsius', 'fahrenheit', 'kelvin']
-    };
-
-    const selectedUnits = units[unitType.value] || [];
-
-    fromUnit.innerHTML = '';
-    toUnit.innerHTML = '';
-
-    selectedUnits.forEach(unit => {
-        fromUnit.appendChild(new Option(unit, unit));
-        toUnit.appendChild(new Option(unit, unit));
-    });
-}
-
-function convertUnit() {
-    alert('Unit converter functionality is not fully implemented in this demo.');
-}
-
 // INVOICE GENERATOR
-function generateInvoice() {
-    alert('Invoice generator functionality is not implemented in this demo.');
-}
-
 // EMAIL TEMPLATES
-function generateEmailTemplate() {
-    alert('Email template functionality is not implemented in this demo.');
-}
-
 // MEETING NOTES
-function formatMeetingNotes() {
-    alert('Meeting notes functionality is not implemented in this demo.');
-}
-
 // =========================================
 // SECURITY TOOLS
 // =========================================
@@ -1015,20 +856,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 // SECURE NOTEPAD
-function encryptNotes() {
-    alert('Secure notepad encryption functionality is not implemented in this demo.');
-}
 
-function decryptNotes() {
-    alert('Secure notepad decryption functionality is not implemented in this demo.');
-}
-
-function clearSecureNotes() {
-    const secureNotes = document.getElementById('secure-notes');
-    if (secureNotes && confirm('Are you sure you want to clear secure notes?')) {
-        secureNotes.value = '';
-    }
-}
 
 // =========================================
 // SYSTEM TOOLS
@@ -1130,18 +958,4 @@ function formatTime(seconds) {
 }
 
 // AI SEARCH ASSISTANT
-function searchWithAI() {
-    alert('AI search assistant functionality is not implemented in this demo.');
-}
-
-function clearChat() {
-    const chatOutput = document.getElementById('chat-output');
-    if (chatOutput) {
-        chatOutput.innerHTML = '';
-    }
-}
-
 // WEATHER WIDGET
-function getWeather() {
-    alert('Weather widget functionality is not implemented in this demo.');
-}
