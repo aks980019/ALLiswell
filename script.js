@@ -1,4 +1,3 @@
-
 // =========================================
 // GLOBAL VARIABLES AND AUTHENTICATION
 // =========================================
@@ -88,6 +87,10 @@ function initializeNewComponents() {
     renderEvents();
 }
 
+function setupSearch() {
+    // Empty implementation for search functionality
+}
+
 // =========================================
 // NAVIGATION AND UI MANAGEMENT
 // =========================================
@@ -160,11 +163,9 @@ function showHome() {
 
     if (homeOverview) {
         homeOverview.style.display = 'block';
-        updateRecentActivities();
     }
 
     updateNavigation('home');
-   
 }
 
 function updateNavigation(activeCategory) {
@@ -180,21 +181,67 @@ function updateNavigation(activeCategory) {
     });
 }
 
+// Quick Action Functions - DISABLED
+function openQuickNote() {
+    alert('Quick actions are disabled');
+}
+
+function generateQuickPassword() {
+    alert('Quick actions are disabled');
+}
+
+function startQuickTimer() {
+    alert('Quick actions are disabled');
+}
+
+function openQuickTodo() {
+    alert('Quick actions are disabled');
+}
+
 function setupEventListeners() {
-    document.getElementById('todo-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') addTodo();
-    });
+    const todoInput = document.getElementById('todo-input');
+    if (todoInput) {
+        todoInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTodo();
+        });
+    }
 
-    document.getElementById('notes-area').addEventListener('input', function() {
-        localStorage.setItem('quickNotes', this.value);
-    });
+    const notesArea = document.getElementById('notes-area');
+    if (notesArea) {
+        notesArea.addEventListener('input', function() {
+            localStorage.setItem('quickNotes', this.value);
+        });
+    }
 
-    document.getElementById('counter-input').addEventListener('input', updateTextCounter);
-    document.getElementById('markdown-input').addEventListener('input', updateMarkdownPreview);
-    document.getElementById('color-input').addEventListener('input', updateColorPicker);
-    document.getElementById('unit-type').addEventListener('change', setupUnitConverter);
-    document.getElementById('image-input').addEventListener('change', handleImageUpload);
-    document.getElementById('favicon-input').addEventListener('change', handleFaviconUpload);
+    const counterInput = document.getElementById('counter-input');
+    if (counterInput) {
+        counterInput.addEventListener('input', updateTextCounter);
+    }
+
+    const markdownInput = document.getElementById('markdown-input');
+    if (markdownInput) {
+        markdownInput.addEventListener('input', updateMarkdownPreview);
+    }
+
+    const colorInput = document.getElementById('color-input');
+    if (colorInput) {
+        colorInput.addEventListener('input', updateColorPicker);
+    }
+
+    const unitType = document.getElementById('unit-type');
+    if (unitType) {
+        unitType.addEventListener('change', setupUnitConverter);
+    }
+
+    const imageInput = document.getElementById('image-input');
+    if (imageInput) {
+        imageInput.addEventListener('change', handleImageUpload);
+    }
+
+    const faviconInput = document.getElementById('favicon-input');
+    if (faviconInput) {
+        faviconInput.addEventListener('change', handleFaviconUpload);
+    }
 
     const chatInput = document.getElementById('chat-input');
     if (chatInput) {
@@ -209,7 +256,10 @@ function setupEventListeners() {
     const slider = document.getElementById('quality-slider');
     if (slider) {
         slider.addEventListener('input', function() {
-            document.getElementById('quality-value').textContent = Math.round(this.value * 100) + '%';
+            const qualityValue = document.getElementById('quality-value');
+            if (qualityValue) {
+                qualityValue.textContent = Math.round(this.value * 100) + '%';
+            }
         });
     }
 }
@@ -221,6 +271,8 @@ function setupEventListeners() {
 // TO-DO LIST FUNCTIONALITY
 function addTodo() {
     const input = document.getElementById('todo-input');
+    if (!input) return;
+
     const text = input.value.trim();
 
     if (text) {
@@ -235,7 +287,6 @@ function addTodo() {
         saveTodos();
         renderTodos();
         input.value = '';
-        addRecentActivity('Added new todo item', 'fas fa-tasks');
     }
 }
 
@@ -255,6 +306,8 @@ function deleteTodo(id) {
 
 function renderTodos() {
     const list = document.getElementById('todo-list');
+    if (!list) return;
+
     list.innerHTML = todos.map(todo => `
         <li class="todo-item ${todo.completed ? 'completed' : ''}">
             <span onclick="toggleTodo(${todo.id})">${todo.text}</span>
@@ -308,52 +361,90 @@ function resetTimer() {
 }
 
 function updateTimerDisplay() {
-    const minutes = Math.floor(currentTime / 60);
-    const seconds = currentTime % 60;
-    document.getElementById('timer-display').textContent = 
-        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const timerDisplay = document.getElementById('timer-display');
+    if (timerDisplay) {
+        const minutes = Math.floor(currentTime / 60);
+        const seconds = currentTime % 60;
+        timerDisplay.textContent = 
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
 }
 
 // NOTES FUNCTIONALITY
 function saveNotes() {
-    const notes = document.getElementById('notes-area').value;
-    localStorage.setItem('quickNotes', notes);
-    alert('Notes saved!');
-    addRecentActivity('Saved notes', 'fas fa-sticky-note');
+    const notesArea = document.getElementById('notes-area');
+    if (notesArea) {
+        const notes = notesArea.value;
+        localStorage.setItem('quickNotes', notes);
+        alert('Notes saved!');
+    }
 }
 
 function exportNotes() {
-    const notes = document.getElementById('notes-area').value;
-    const blob = new Blob([notes], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'notes.txt';
-    a.click();
-    URL.revokeObjectURL(url);
+    const notesArea = document.getElementById('notes-area');
+    if (notesArea) {
+        const notes = notesArea.value;
+        const blob = new Blob([notes], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'notes.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
 }
 
 function clearNotes() {
     if (confirm('Are you sure you want to clear all notes?')) {
-        document.getElementById('notes-area').value = '';
-        localStorage.removeItem('quickNotes');
+        const notesArea = document.getElementById('notes-area');
+        if (notesArea) {
+            notesArea.value = '';
+            localStorage.removeItem('quickNotes');
+        }
     }
 }
 
 function loadNotes() {
     const notes = localStorage.getItem('quickNotes');
-    if (notes) {
-        document.getElementById('notes-area').value = notes;
+    const notesArea = document.getElementById('notes-area');
+    if (notes && notesArea) {
+        notesArea.value = notes;
     }
 }
 
-// CLIPBOARD MANAGER FUNCTIONALITY
+// CLIPBOARD MANAGER FUNCTIONALITY - DISABLED
+function saveToClipboard() {
+    alert('Clipboard manager is disabled');
+}
 
+function renderClipboardHistory() {
+    const historyDiv = document.getElementById('clipboard-history');
+    if (historyDiv) {
+        historyDiv.innerHTML = '<p style="text-align: center; color: #666;">Clipboard manager is disabled</p>';
+    }
+}
+
+function copyToClipboard(text) {
+    alert('Clipboard manager is disabled');
+}
+
+function deleteClipboardItem(id) {
+    alert('Clipboard manager is disabled');
+}
+
+function loadClipboardHistory() {
+    renderClipboardHistory();
+}
 
 // CALENDAR WIDGET FUNCTIONALITY
 function addEvent() {
-    const title = document.getElementById('event-title').value;
-    const datetime = document.getElementById('event-datetime').value;
+    const titleInput = document.getElementById('event-title');
+    const datetimeInput = document.getElementById('event-datetime');
+
+    if (!titleInput || !datetimeInput) return;
+
+    const title = titleInput.value;
+    const datetime = datetimeInput.value;
 
     if (title && datetime) {
         const event = {
@@ -366,8 +457,8 @@ function addEvent() {
         localStorage.setItem('calendarEvents', JSON.stringify(events));
         renderEvents();
 
-        document.getElementById('event-title').value = '';
-        document.getElementById('event-datetime').value = '';
+        titleInput.value = '';
+        datetimeInput.value = '';
     }
 }
 
@@ -398,6 +489,8 @@ function deleteEvent(id) {
 function formatText(type) {
     const input = document.getElementById('text-input');
     const output = document.getElementById('text-output');
+    if (!input || !output) return;
+
     const text = input.value;
 
     let formatted = '';
@@ -420,19 +513,44 @@ function formatText(type) {
     output.textContent = formatted;
 }
 
-// WORD COUNTER
+// WORD COUNCOUNTER
 function updateTextCounter() {
-    const text = document.getElementById('counter-input').value;
+    const textInput = document.getElementById('counter-input');
+    if (!textInput) return;
+
+    const text = textInput.value;
     const chars = text.length;
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const lines = text.split('\n').length;
 
-    document.getElementById('char-count').textContent = chars;
-    document.getElementById('word-count').textContent = words;
-    document.getElementById('line-count').textContent = lines;
-}
-// MARKDOWN PREVIEWER
+    const charCount = document.getElementById('char-count');
+    const wordCount = document.getElementById('word-count');
+    const lineCount = document.getElementById('line-count');
 
+    if (charCount) charCount.textContent = chars;
+    if (wordCount) wordCount.textContent = words;
+    if (lineCount) lineCount.textContent = lines;
+}
+
+// MARKDOWN PREVIEWER
+function updateMarkdownPreview() {
+    const input = document.getElementById('markdown-input');
+    const output = document.getElementById('markdown-output');
+
+    if (input && output) {
+        const text = input.value;
+        // Simple markdown conversion (basic implementation)
+        let html = text
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/\n/gim, '<br>');
+
+        output.innerHTML = html;
+    }
+}
 
 // PDF TOOLS (Mock implementations)
 function mergePDFs() {
@@ -452,7 +570,6 @@ function compressPDF() {
 // =========================================
 
 // IMAGE RESIZER
-
 function handleImageUpload(event) {
     const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
@@ -460,11 +577,15 @@ function handleImageUpload(event) {
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
-                document.getElementById('width-input').value = img.width;
-                document.getElementById('height-input').value = img.height;
-
+                const widthInput = document.getElementById('width-input');
+                const heightInput = document.getElementById('height-input');
                 const preview = document.getElementById('image-preview');
-                preview.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 200px;">`;
+
+                if (widthInput) widthInput.value = img.width;
+                if (heightInput) heightInput.value = img.height;
+                if (preview) {
+                    preview.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 200px;">`;
+                }
             };
             img.src = e.target.result;
         };
@@ -473,12 +594,20 @@ function handleImageUpload(event) {
 }
 
 function resizeImage() {
-    const file = document.getElementById('image-input').files[0];
-    const width = parseInt(document.getElementById('width-input').value);
-    const height = parseInt(document.getElementById('height-input').value);
+    const fileInput = document.getElementById('image-input');
+    const widthInput = document.getElementById('width-input');
+    const heightInput = document.getElementById('height-input');
+
+    if (!fileInput || !widthInput || !heightInput) return;
+
+    const file = fileInput.files[0];
+    const width = parseInt(widthInput.value);
+    const height = parseInt(heightInput.value);
 
     if (file && width && height) {
         const canvas = document.getElementById('image-canvas');
+        if (!canvas) return;
+
         const ctx = canvas.getContext('2d');
         const img = new Image();
 
@@ -504,27 +633,54 @@ function resizeImage() {
 }
 
 // FAVICON GENERATOR
+function handleFaviconUpload(event) {
+    alert('Favicon generator functionality would require additional libraries for proper implementation.');
+}
 
+function generateFavicon() {
+    alert('Favicon generator functionality would require additional libraries for proper implementation.');
+}
 
 // IMAGE COMPRESSOR
+function compressImage() {
+    alert('Image compressor functionality would require additional canvas manipulation.');
+}
 
 // FORMAT CONVERTER
-
+function convertImageFormat() {
+    alert('Format converter functionality would require additional canvas manipulation.');
+}
 
 // CROP & ROTATE
-
+function rotateImage(degrees) {
+    alert('Crop & rotate functionality would require additional canvas manipulation.');
+}
 
 // =========================================
 // WEB & CODE TOOLS
 // =========================================
 
 // JSON FORMATTER
+function formatJSON() {
+    alert('JSON formatter functionality is not implemented in this demo.');
+}
 
+function validateJSON() {
+    alert('JSON validator functionality is not implemented in this demo.');
+}
+
+function minifyJSON() {
+    alert('JSON minifier functionality is not implemented in this demo.');
+}
 
 // QR CODE GENERATOR
 function generateQR() {
-    const text = document.getElementById('qr-input').value;
+    const textInput = document.getElementById('qr-input');
     const output = document.getElementById('qr-output');
+
+    if (!textInput || !output) return;
+
+    const text = textInput.value;
 
     if (text) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
@@ -536,11 +692,20 @@ function generateQR() {
 }
 
 // BASE64 ENCODER/DECODER
+function encodeBase64() {
+    alert('Base64 encoder functionality is not implemented in this demo.');
+}
 
+function decodeBase64() {
+    alert('Base64 decoder functionality is not implemented in this demo.');
+}
 
 // COLOR PICKER
 function updateColorPicker() {
-    const color = document.getElementById('color-input').value;
+    const colorInput = document.getElementById('color-input');
+    if (!colorInput) return;
+
+    const color = colorInput.value;
 
     // Convert hex to RGB
     const r = parseInt(color.substr(1, 2), 16);
@@ -567,9 +732,13 @@ function updateColorPicker() {
         h /= 6;
     }
 
-    document.getElementById('hex-value').textContent = color.toUpperCase();
-    document.getElementById('rgb-value').textContent = `rgb(${r}, ${g}, ${b})`;
-    document.getElementById('hsl-value').textContent = `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+    const hexValue = document.getElementById('hex-value');
+    const rgbValue = document.getElementById('rgb-value');
+    const hslValue = document.getElementById('hsl-value');
+
+    if (hexValue) hexValue.textContent = color.toUpperCase();
+    if (rgbValue) rgbValue.textContent = `rgb(${r}, ${g}, ${b})`;
+    if (hslValue) hslValue.textContent = `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
 
     // Generate palette
     generateColorPalette(color);
@@ -577,6 +746,8 @@ function updateColorPicker() {
 
 function generateColorPalette(baseColor) {
     const palette = document.getElementById('color-palette');
+    if (!palette) return;
+
     const colors = [];
 
     // Generate variations
@@ -593,12 +764,16 @@ function generateColorPalette(baseColor) {
     ).join('');
 }
 
-
 // LOREM IPSUM GENERATOR
 function generateLorem() {
-    const count = parseInt(document.getElementById('lorem-count').value);
-    const type = document.getElementById('lorem-type').value;
+    const countInput = document.getElementById('lorem-count');
+    const typeSelect = document.getElementById('lorem-type');
     const output = document.getElementById('lorem-output');
+
+    if (!countInput || !typeSelect || !output) return;
+
+    const count = parseInt(countInput.value);
+    const type = typeSelect.value;
 
     const loremText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -628,13 +803,23 @@ function generateLorem() {
 }
 
 // CODE MINIFIER
-
+function minifyCode() {
+    alert('Code minifier functionality is not implemented in this demo.');
+}
 
 // REGEX TESTER
-
+function testRegex() {
+    alert('Regex tester functionality is not implemented in this demo.');
+}
 
 // URL ENCODER
+function encodeURL() {
+    alert('URL encoder functionality is not implemented in this demo.');
+}
 
+function decodeURL() {
+    alert('URL decoder functionality is not implemented in this demo.');
+}
 
 // =========================================
 // BUSINESS TOOLS
@@ -642,10 +827,16 @@ function generateLorem() {
 
 // CURRENCY CONVERTER
 function convertCurrency() {
-    const amount = parseFloat(document.getElementById('currency-amount').value);
-    const fromCurrency = document.getElementById('from-currency').value;
-    const toCurrency = document.getElementById('to-currency').value;
+    const amountInput = document.getElementById('currency-amount');
+    const fromSelect = document.getElementById('from-currency');
+    const toSelect = document.getElementById('to-currency');
     const result = document.getElementById('currency-result');
+
+    if (!amountInput || !fromSelect || !toSelect || !result) return;
+
+    const amount = parseFloat(amountInput.value);
+    const fromCurrency = fromSelect.value;
+    const toCurrency = toSelect.value;
 
     if (isNaN(amount)) {
         result.textContent = 'Please enter a valid amount';
@@ -672,15 +863,48 @@ function convertCurrency() {
 }
 
 // UNIT CONVERTER
+function setupUnitConverter() {
+    const unitType = document.getElementById('unit-type');
+    const fromUnit = document.getElementById('from-unit');
+    const toUnit = document.getElementById('to-unit');
+
+    if (!unitType || !fromUnit || !toUnit) return;
+
+    const units = {
+        length: ['meter', 'kilometer', 'centimeter', 'millimeter', 'inch', 'foot', 'yard', 'mile'],
+        weight: ['kilogram', 'gram', 'pound', 'ounce', 'ton'],
+        temperature: ['celsius', 'fahrenheit', 'kelvin']
+    };
+
+    const selectedUnits = units[unitType.value] || [];
+
+    fromUnit.innerHTML = '';
+    toUnit.innerHTML = '';
+
+    selectedUnits.forEach(unit => {
+        fromUnit.appendChild(new Option(unit, unit));
+        toUnit.appendChild(new Option(unit, unit));
+    });
+}
+
+function convertUnit() {
+    alert('Unit converter functionality is not fully implemented in this demo.');
+}
 
 // INVOICE GENERATOR
-
+function generateInvoice() {
+    alert('Invoice generator functionality is not implemented in this demo.');
+}
 
 // EMAIL TEMPLATES
-
+function generateEmailTemplate() {
+    alert('Email template functionality is not implemented in this demo.');
+}
 
 // MEETING NOTES
-
+function formatMeetingNotes() {
+    alert('Meeting notes functionality is not implemented in this demo.');
+}
 
 // =========================================
 // SECURITY TOOLS
@@ -688,17 +912,21 @@ function convertCurrency() {
 
 // PASSWORD GENERATOR
 function generatePassword() {
-    const length = parseInt(document.getElementById('password-length').value);
-    const includeUpper = document.getElementById('include-uppercase').checked;
-    const includeLower = document.getElementById('include-lowercase').checked;
-    const includeNumbers = document.getElementById('include-numbers').checked;
-    const includeSymbols = document.getElementById('include-symbols').checked;
+    const lengthInput = document.getElementById('password-length');
+    const includeUpper = document.getElementById('include-uppercase');
+    const includeLower = document.getElementById('include-lowercase');
+    const includeNumbers = document.getElementById('include-numbers');
+    const includeSymbols = document.getElementById('include-symbols');
+
+    if (!lengthInput || !includeUpper || !includeLower || !includeNumbers || !includeSymbols) return;
+
+    const length = parseInt(lengthInput.value);
 
     let chars = '';
-    if (includeUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (includeLower) chars += 'abcdefghijklmnopqrstuvwxyz';
-    if (includeNumbers) chars += '0123456789';
-    if (includeSymbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    if (includeUpper.checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (includeLower.checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+    if (includeNumbers.checked) chars += '0123456789';
+    if (includeSymbols.checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
 
     if (!chars) {
         alert('Please select at least one character type');
@@ -716,9 +944,9 @@ function generatePassword() {
 
     if (length >= 8) strength += 25;
     if (length >= 12) strength += 25;
-    if (includeUpper && includeLower) strength += 20;
-    if (includeNumbers) strength += 15;
-    if (includeSymbols) strength += 15;
+    if (includeUpper.checked && includeLower.checked) strength += 20;
+    if (includeNumbers.checked) strength += 15;
+    if (includeSymbols.checked) strength += 15;
 
     if (strength >= 80) {
         strengthText = 'Very Strong';
@@ -735,24 +963,24 @@ function generatePassword() {
     }
 
     const output = document.getElementById('password-output');
-    output.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <span style="font-family: monospace; font-size: 1.1em; font-weight: bold; flex: 1; word-break: break-all;">${password}</span>
-            <button onclick="navigator.clipboard.writeText('${password}').then(() => showToast('Password copied!'))" 
-                    style="padding: 8px 12px; font-size: 12px; min-width: 60px;">Copy</button>
-        </div>
-        <div style="margin-top: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                <span style="font-size: 0.9em;">Strength:</span>
-                <span style="color: ${strengthColor}; font-weight: bold; font-size: 0.9em;">${strengthText}</span>
+    if (output) {
+        output.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <span style="font-family: monospace; font-size: 1.1em; font-weight: bold; flex: 1; word-break: break-all;">${password}</span>
+                <button onclick="navigator.clipboard.writeText('${password}').then(() => showToast('Password copied!'))" 
+                        style="padding: 8px 12px; font-size: 12px; min-width: 60px;">Copy</button>
             </div>
-            <div style="background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden;">
-                <div style="background: ${strengthColor}; height: 100%; width: ${strength}%; transition: all 0.3s ease;"></div>
+            <div style="margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <span style="font-size: 0.9em;">Strength:</span>
+                    <span style="color: ${strengthColor}; font-weight: bold; font-size: 0.9em;">${strengthText}</span>
+                </div>
+                <div style="background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden;">
+                    <div style="background: ${strengthColor}; height: 100%; width: ${strength}%; transition: all 0.3s ease;"></div>
+                </div>
             </div>
-        </div>
-    `;
-
-    
+        `;
+    }
 }
 
 function showToast(message) {
@@ -768,8 +996,7 @@ function showToast(message) {
     document.body.appendChild(toast);
 
     setTimeout(() => {
-        toast.style.animation = 'slideOut 0.3s ease forwards';
-        setTimeout(() => document.body.removeChild(toast), 300);
+        toast.style.animation = 'slideOut 0.3s ease forwards';setTimeout(() => document.body.removeChild(toast), 300);
     }, 2000);
 }
 
@@ -788,6 +1015,20 @@ style.textContent = `
 document.head.appendChild(style);
 
 // SECURE NOTEPAD
+function encryptNotes() {
+    alert('Secure notepad encryption functionality is not implemented in this demo.');
+}
+
+function decryptNotes() {
+    alert('Secure notepad decryption functionality is not implemented in this demo.');
+}
+
+function clearSecureNotes() {
+    const secureNotes = document.getElementById('secure-notes');
+    if (secureNotes && confirm('Are you sure you want to clear secure notes?')) {
+        secureNotes.value = '';
+    }
+}
 
 // =========================================
 // SYSTEM TOOLS
@@ -795,10 +1036,16 @@ document.head.appendChild(style);
 
 // TIMEZONE CONVERTER
 function convertTimezone() {
-    const datetime = document.getElementById('datetime-input').value;
-    const fromTz = document.getElementById('from-timezone').value;
-    const toTz = document.getElementById('to-timezone').value;
+    const datetimeInput = document.getElementById('datetime-input');
+    const fromTzSelect = document.getElementById('from-timezone');
+    const toTzSelect = document.getElementById('to-timezone');
     const result = document.getElementById('timezone-result');
+
+    if (!datetimeInput || !fromTzSelect || !toTzSelect || !result) return;
+
+    const datetime = datetimeInput.value;
+    const fromTz = fromTzSelect.value;
+    const toTz = toTzSelect.value;
 
     if (!datetime) {
         result.textContent = 'Please select a date and time';
@@ -848,7 +1095,10 @@ function resetStopwatch() {
     stopwatchTime = 0;
     lapCounter = 0;
     updateStopwatchDisplay();
-    document.getElementById('lap-times').innerHTML = '';
+    const lapTimes = document.getElementById('lap-times');
+    if (lapTimes) {
+        lapTimes.innerHTML = '';
+    }
 }
 
 function lapStopwatch() {
@@ -856,15 +1106,20 @@ function lapStopwatch() {
         lapCounter++;
         const lapTime = formatTime(stopwatchTime);
         const lapTimes = document.getElementById('lap-times');
-        const lapDiv = document.createElement('div');
-        lapDiv.className = 'lap-time';
-        lapDiv.innerHTML = `<span>Lap ${lapCounter}</span><span>${lapTime}</span>`;
-        lapTimes.appendChild(lapDiv);
+        if (lapTimes) {
+            const lapDiv = document.createElement('div');
+            lapDiv.className = 'lap-time';
+            lapDiv.innerHTML = `<span>Lap ${lapCounter}</span><span>${lapTime}</span>`;
+            lapTimes.appendChild(lapDiv);
+        }
     }
 }
 
 function updateStopwatchDisplay() {
-    document.getElementById('stopwatch-display').textContent = formatTime(stopwatchTime);
+    const stopwatchDisplay = document.getElementById('stopwatch-display');
+    if (stopwatchDisplay) {
+        stopwatchDisplay.textContent = formatTime(stopwatchTime);
+    }
 }
 
 function formatTime(seconds) {
@@ -875,9 +1130,18 @@ function formatTime(seconds) {
 }
 
 // AI SEARCH ASSISTANT
+function searchWithAI() {
+    alert('AI search assistant functionality is not implemented in this demo.');
+}
 
+function clearChat() {
+    const chatOutput = document.getElementById('chat-output');
+    if (chatOutput) {
+        chatOutput.innerHTML = '';
+    }
+}
 
 // WEATHER WIDGET
-
-
-
+function getWeather() {
+    alert('Weather widget functionality is not implemented in this demo.');
+}

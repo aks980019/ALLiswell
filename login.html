@@ -120,24 +120,6 @@
             display: none;
         }
 
-        .demo-credentials {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .demo-credentials h4 {
-            color: #2f855a;
-            margin-bottom: 0.5rem;
-        }
-
-        .demo-credentials p {
-            color: #38a169;
-            margin: 0.25rem 0;
-        }
 
         @media (max-width: 480px) {
             .login-container {
@@ -182,7 +164,6 @@
                 <input id="Email" name="Email" type="email" placeholder="Enter your Email" required
                 oninvalid="this.setCustomValidity('You are requested to Fill this')"
                 oninput="this.setCustomValidity('')">
-                
             </div>
 
             <div class="form-group">
@@ -200,11 +181,7 @@
             </button>
         </form>
 
-        <div class="error-message" id="errorMessage">
-            Passwords do not match. Please try again.
-        </div>
-
-        
+        <div class="error-message" id="errorMessage"></div>
     </div>
 
     <script>
@@ -212,42 +189,33 @@
             e.preventDefault();
 
             const username = document.getElementById('username').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('Email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            const errorMessage = document.getElementById('errorMessage');
 
-            // Reset error message
-            errorMessage.style.display = 'none';
-
-            // Validation
-            if (!username) {
-                showError('Please enter a username');
+            // Basic validation
+            if (!username || !phone || !email || !password || !confirmPassword) {
+                showError('Please fill in all fields');
                 return;
             }
 
-            if (!password) {
-                showError('Please enter a password');
-                return;
-            }
-
-            if (!confirmPassword) {
-                showError('Please confirm your password');
+            if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+                showError('Please enter a valid 10-digit phone number');
                 return;
             }
 
             if (password !== confirmPassword) {
-                showError('Passwords do not match. Please try again.');
-                document.getElementById('confirmPassword').value = '';
-                document.getElementById('confirmPassword').focus();
+                showError('Passwords do not match');
                 return;
             }
 
-            if (password.length < 3) {
-                showError('Password must be at least 3 characters long');
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters long');
                 return;
             }
 
-            // If all validations pass, store login status
+            // Store user data (in real app, this would be sent to a server)
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('username', username);
             localStorage.setItem('loginTime', new Date().toISOString());
