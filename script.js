@@ -73,7 +73,6 @@ function initializeApp() {
     setupUnitConverter();
     updateTimerDisplay();
     renderEvents();
-    updateRecentActivities();
 }
 
 function addLogoutButton() {
@@ -432,7 +431,6 @@ function updateTextCounter() {
     document.getElementById('word-count').textContent = words;
     document.getElementById('line-count').textContent = lines;
 }
-
 // MARKDOWN PREVIEWER
 
 
@@ -455,39 +453,48 @@ function compressPDF() {
 
 // IMAGE RESIZER
 
-
-// FAVICON GENERATOR
-
-
-// IMAGE COMPRESSOR
-function compressImage() {
-    const file = document.getElementById('compress-input').files[0];
-    const quality = document.getElementById('quality-slider').value;
-
+function handleImageUpload(event) {
+    const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
-        const canvas = document.createElement('canvas');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                document.getElementById('width-input').value = img.width;
+                document.getElementById('height-input').value = img.height;
+
+                const preview = document.getElementById('image-preview');
+                preview.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 200px;">`;
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function resizeImage() {
+    const file = document.getElementById('image-input').files[0];
+    const width = parseInt(document.getElementById('width-input').value);
+    const height = parseInt(document.getElementById('height-input').value);
+
+    if (file && width && height) {
+        const canvas = document.getElementById('image-canvas');
         const ctx = canvas.getContext('2d');
         const img = new Image();
 
         img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
 
             canvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
-                const output = document.getElementById('compression-output');
-                const originalSize = (file.size / 1024).toFixed(2);
-                const compressedSize = (blob.size / 1024).toFixed(2);
-
-                output.innerHTML = `
-                    <p>Original: ${originalSize} KB</p>
-                    <p>Compressed: ${compressedSize} KB</p>
-                    <p>Savings: ${((file.size - blob.size) / file.size * 100).toFixed(1)}%</p>
-                    <img src="${url}" style="max-width: 100%; max-height: 200px;">
-                    <br><a href="${url}" download="compressed_${file.name}">Download</a>
-                `;
-            }, file.type, quality);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `resized_${file.name}`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
         };
 
         const reader = new FileReader();
@@ -495,6 +502,11 @@ function compressImage() {
         reader.readAsDataURL(file);
     }
 }
+
+// FAVICON GENERATOR
+
+
+// IMAGE COMPRESSOR
 
 // FORMAT CONVERTER
 
@@ -527,6 +539,59 @@ function generateQR() {
 
 
 // COLOR PICKER
+function updateColorPicker() {
+    const color = document.getElementById('color-input').value;
+
+    // Convert hex to RGB
+    const r = parseInt(color.substr(1, 2), 16);
+    const g = parseInt(color.substr(3, 2), 16);
+    const b = parseInt(color.substr(5, 2), 16);
+
+    // Convert RGB to HSL
+    const max = Math.max(r, g, b) / 255;
+    const min = Math.min(r, g, b) / 255;
+    const diff = max - min;
+    const sum = max + min;
+    const l = sum / 2;
+
+    let h, s;
+    if (diff === 0) {
+        h = s = 0;
+    } else {
+        s = l > 0.5 ? diff / (2 - sum) : diff / sum;
+        switch (max) {
+            case r / 255: h = ((g - b) / 255) / diff + (g < b ? 6 : 0); break;
+            case g / 255: h = ((b - r) / 255) / diff + 2; break;
+            case b / 255: h = ((r - g) / 255) / diff + 4; break;
+        }
+        h /= 6;
+    }
+
+    document.getElementById('hex-value').textContent = color.toUpperCase();
+    document.getElementById('rgb-value').textContent = `rgb(${r}, ${g}, ${b})`;
+    document.getElementById('hsl-value').textContent = `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+
+    // Generate palette
+    generateColorPalette(color);
+}
+
+function generateColorPalette(baseColor) {
+    const palette = document.getElementById('color-palette');
+    const colors = [];
+
+    // Generate variations
+    for (let i = 0; i < 5; i++) {
+        const factor = 0.2 + (i * 0.2);
+        const r = Math.round(parseInt(baseColor.substr(1, 2), 16) * factor);
+        const g = Math.round(parseInt(baseColor.substr(3, 2), 16) * factor);
+        const b = Math.round(parseInt(baseColor.substr(5, 2), 16) * factor);
+        colors.push(`#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`);
+    }
+
+    palette.innerHTML = colors.map(color => 
+        `<div class="color-swatch" style="background-color: ${color}" onclick="document.getElementById('color-input').value='${color}'; updateColorPicker()"></div>`
+    ).join('');
+}
 
 
 // LOREM IPSUM GENERATOR
@@ -576,73 +641,37 @@ function generateLorem() {
 // =========================================
 
 // CURRENCY CONVERTER
+function convertCurrency() {
+    const amount = parseFloat(document.getElementById('currency-amount').value);
+    const fromCurrency = document.getElementById('from-currency').value;
+    const toCurrency = document.getElementById('to-currency').value;
+    const result = document.getElementById('currency-result');
 
-
-// UNIT CONVERTER
-function setupUnitConverter() {
-    const unitType = document.getElementById('unit-type').value;
-    const fromUnit = document.getElementById('from-unit');
-    const toUnit = document.getElementById('to-unit');
-
-    const units = {
-        length: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'yd', 'mi'],
-        weight: ['mg', 'g', 'kg', 'oz', 'lb', 'ton'],
-        temperature: ['°C', '°F', 'K']
-    };
-
-    const options = units[unitType].map(unit => `<option value="${unit}">${unit}</option>`).join('');
-    fromUnit.innerHTML = options;
-    toUnit.innerHTML = options;
-}
-
-function convertUnit() {
-    const value = parseFloat(document.getElementById('unit-value').value);
-    const unitType = document.getElementById('unit-type').value;
-    const fromUnit = document.getElementById('from-unit').value;
-    const toUnit = document.getElementById('to-unit').value;
-    const result = document.getElementById('unit-result');
-
-    if (isNaN(value)) {
-        result.textContent = 'Please enter a valid value';
+    if (isNaN(amount)) {
+        result.textContent = 'Please enter a valid amount';
         return;
     }
 
-    let convertedValue = value;
+    // Mock exchange rates (in a real app, you'd use an API)
+    const rates = {
+        'USD': { 'EUR': 0.85, 'GBP': 0.73, 'JPY': 110 },
+        'EUR': { 'USD': 1.18, 'GBP': 0.86, 'JPY': 129 },
+        'GBP': { 'USD': 1.37, 'EUR': 1.16, 'JPY': 151 },
+        'JPY': { 'USD': 0.009, 'EUR': 0.008, 'GBP': 0.007 }
+    };
 
-    if (unitType === 'length') {
-        const toMeters = {
-            'mm': 0.001, 'cm': 0.01, 'm': 1, 'km': 1000,
-            'in': 0.0254, 'ft': 0.3048, 'yd': 0.9144, 'mi': 1609.34
-        };
-        const meters = value * toMeters[fromUnit];
-        convertedValue = meters / toMeters[toUnit];
-    }
-    else if (unitType === 'weight') {
-        const toGrams = {
-            'mg': 0.001, 'g': 1, 'kg': 1000,
-            'oz': 28.3495, 'lb': 453.592, 'ton': 1000000
-        };
-        const grams = value * toGrams[fromUnit];
-        convertedValue = grams / toGrams[toUnit];
-    }
-    else if (unitType === 'temperature') {
-        if (fromUnit === '°C' && toUnit === '°F') {
-            convertedValue = (value * 9/5) + 32;
-        } else if (fromUnit === '°F' && toUnit === '°C') {
-            convertedValue = (value - 32) * 5/9;
-        } else if (fromUnit === '°C' && toUnit === 'K') {
-            convertedValue = value + 273.15;
-        } else if (fromUnit === 'K' && toUnit === '°C') {
-            convertedValue = value - 273.15;
-        } else if (fromUnit === '°F' && toUnit === 'K') {
-            convertedValue = ((value - 32) * 5/9) + 273.15;
-        } else if (fromUnit === 'K' && toUnit === '°F') {
-            convertedValue = ((value - 273.15) * 9/5) + 32;
-        }
+    let convertedAmount;
+    if (fromCurrency === toCurrency) {
+        convertedAmount = amount;
+    } else {
+        const rate = rates[fromCurrency]?.[toCurrency] || 1;
+        convertedAmount = amount * rate;
     }
 
-    result.textContent = `${value} ${fromUnit} = ${convertedValue.toFixed(4)} ${toUnit}`;
+    result.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
 }
+
+// UNIT CONVERTER
 
 // INVOICE GENERATOR
 
@@ -851,51 +880,3 @@ function formatTime(seconds) {
 // WEATHER WIDGET
 
 
-// =========================================
-// HOME PAGE INTERACTIVE FEATURES
-// =========================================
-
-// QUICK ACTION FUNCTIONS
-function openQuickNote() {
-    showCategory('productivity');
-    setTimeout(() => {
-        const notesArea = document.getElementById('notes-area');
-        if (notesArea) {
-            notesArea.focus();
-            notesArea.placeholder = 'Quick note: ' + new Date().toLocaleString();
-        }
-    }, 100);
-    addRecentActivity('Opened quick note', 'fas fa-sticky-note');
-}
-
-function generateQuickPassword() {
-    document.getElementById('password-length').value = 12;
-    document.getElementById('include-uppercase').checked = true;
-    document.getElementById('include-lowercase').checked = true;
-    document.getElementById('include-numbers').checked = true;
-    document.getElementById('include-symbols').checked = true;
-
-    generatePassword();
-    showCategory('security');
-    addRecentActivity('Generated secure password', 'fas fa-key');
-}
-
-function startQuickTimer() {
-    showCategory('productivity');
-    currentTime = 25 * 60;
-    updateTimerDisplay();
-    startTimer();
-    addRecentActivity('Started 25-minute timer', 'fas fa-clock');
-}
-
-function openQuickTodo() {
-    showCategory('productivity');
-    setTimeout(() => {
-        const todoInput = document.getElementById('todo-input');
-        if (todoInput) {
-            todoInput.focus();
-            todoInput.placeholder = 'Add task: ' + new Date().toLocaleDateString();
-        }
-    }, 100);
-    
-}
