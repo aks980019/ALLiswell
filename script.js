@@ -204,20 +204,30 @@ function setupEventListeners() {
         counterInput.addEventListener('input', updateTextCounter);
     }
 
- 
+    const markdownInput = document.getElementById('markdown-input');
+    if (markdownInput) {
+        markdownInput.addEventListener('input', updateMarkdownPreview);
+    }
+
     const colorInput = document.getElementById('color-input');
     if (colorInput) {
         colorInput.addEventListener('input', updateColorPicker);
     }
 
-
+    const unitType = document.getElementById('unit-type');
+    if (unitType) {
+        unitType.addEventListener('change', setupUnitConverter);
+    }
 
     const imageInput = document.getElementById('image-input');
     if (imageInput) {
         imageInput.addEventListener('change', handleImageUpload);
     }
 
-  
+    const faviconInput = document.getElementById('favicon-input');
+    if (faviconInput) {
+        faviconInput.addEventListener('change', handleFaviconUpload);
+    }
 
     const chatInput = document.getElementById('chat-input');
     if (chatInput) {
@@ -388,7 +398,30 @@ function loadNotes() {
     }
 }
 
-// CLIPBOARD MANAGER FUNCTIONALITY 
+// CLIPBOARD MANAGER FUNCTIONALITY - DISABLED
+function saveToClipboard() {
+    alert('Clipboard manager is disabled');
+}
+
+function renderClipboardHistory() {
+    const historyDiv = document.getElementById('clipboard-history');
+    if (historyDiv) {
+        historyDiv.innerHTML = '<p style="text-align: center; color: #666;">Clipboard manager is disabled</p>';
+    }
+}
+
+function copyToClipboard(text) {
+    alert('Clipboard manager is disabled');
+}
+
+function deleteClipboardItem(id) {
+    alert('Clipboard manager');
+}
+
+function loadClipboardHistory() {
+    renderClipboardHistory();
+}
+
 // CALENDAR WIDGET FUNCTIONALITY
 function addEvent() {
     const titleInput = document.getElementById('event-title');
@@ -486,7 +519,24 @@ function updateTextCounter() {
 }
 
 // MARKDOWN PREVIEWER
+function updateMarkdownPreview() {
+    const input = document.getElementById('markdown-input');
+    const output = document.getElementById('markdown-output');
 
+    if (input && output) {
+        const text = input.value;
+        // Simple markdown conversion (basic implementation)
+        let html = text
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/\n/gim, '<br>');
+
+        output.innerHTML = html;
+    }
+}
 
 // PDF TOOLS (Mock implementations)
 function mergePDFs() {
@@ -569,8 +619,11 @@ function resizeImage() {
 }
 
 // FAVICON GENERATOR
+
+
 // IMAGE COMPRESSOR
 // FORMAT CONVERTER
+
 // CROP & ROTATE
 
 
@@ -863,41 +916,6 @@ document.head.appendChild(style);
 // =========================================
 
 // TIMEZONE CONVERTER
-function convertTimezone() {
-    const datetimeInput = document.getElementById('datetime-input');
-    const fromTzSelect = document.getElementById('from-timezone');
-    const toTzSelect = document.getElementById('to-timezone');
-    const result = document.getElementById('timezone-result');
-
-    if (!datetimeInput || !fromTzSelect || !toTzSelect || !result) return;
-
-    const datetime = datetimeInput.value;
-    const fromTz = fromTzSelect.value;
-    const toTz = toTzSelect.value;
-
-    if (!datetime) {
-        result.textContent = 'Please select a date and time';
-        return;
-    }
-
-    try {
-        const date = new Date(datetime);
-        const formatter = new Intl.DateTimeFormat('en-US', {
-            timeZone: toTz,
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-
-        const converted = formatter.format(date);
-        result.textContent = `${datetime} (${fromTz}) = ${converted} (${toTz})`;
-    } catch (e) {
-        result.textContent = 'Error converting timezone: ' + e.message;
-    }
-}
 
 // STOPWATCH
 function startStopwatch() {
